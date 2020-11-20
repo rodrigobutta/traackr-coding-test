@@ -1,11 +1,13 @@
 const fs = require('fs');
 const readline = require('readline');
 const stream = require('stream');
-const { 
-  isAlphabetic, 
-  getRanked, 
+const {   
+  fullnamesPrettyPrint,
+  getFullName,
+  getInventedNames,  
   getModifiedNames, 
-  getInventedNames,
+  getRanked, 
+  isAlphabetic, 
 } = require('./helpers'); 
 
 // Some config definitions
@@ -13,10 +15,12 @@ const SUFFIX_SPLITTER = ' -- ';
 const FULLNAME_SPLITTER = ', ';
 const RANKING_COUNT = 10;
 
+// state
 const fullNames = []; // Array of objects {first: '', last: ''}
 const firstNames = {}; // Dictionary with firstname as key and ocurrences as value
 const lastNames = {}; // Dictionary with lastname as key and ocurrences as value
 
+// Init
 const startFromCommand = args => {
   const params = args.slice(2);
   if(params.length > 0) 
@@ -52,37 +56,36 @@ const parseLine = line => {
   const lastName = nameParts[0];
   const firstName = nameParts[1];
 
-  fullNames.push({last: lastName, first: firstName});
+  fullNames.push(getFullName(firstName,lastName));
 
-  if(lastName in lastNames)
-    lastNames[lastName]++;
-  else
-    lastNames[lastName] = 0;
+  lastNames[lastName] = lastName in lastNames 
+                        ? lastNames[lastName]+1 
+                        : 0;
 
-  if(firstName in firstNames)
-    firstNames[firstName]++;
-  else
-    firstNames[firstName] = 0;
+  firstNames[firstName] = firstName in firstNames
+                        ? firstNames[firstName]+1 
+                        : 0;
+  
 }
 
 const createReport = () => {
-  console.log('fullNames Count', fullNames.length);
-  console.log('Firstnames Count ', Object.keys(firstNames).length);
-  console.log('Lastnames Count ', Object.keys(lastNames).length);
+  console.log('fullNames Count:', fullNames.length);
+  console.log('Firstnames Count:', Object.keys(firstNames).length);
+  console.log('Lastnames Count:', Object.keys(lastNames).length);
 
   const lastNamesRanking = getRanked(lastNames, RANKING_COUNT);
-  console.log('lastNames Rank ', lastNamesRanking);
+  console.log('lastNames Rank\n', lastNamesRanking);
 
   const firstNamesRanking = getRanked(firstNames, RANKING_COUNT);
-  console.log('FirstNames Rank ', firstNamesRanking);
+  console.log('FirstNames Rank\n', firstNamesRanking);
 
   const modifiedNames = getModifiedNames(fullNames, 25)
-  console.log('Modified Names ', modifiedNames);
+  console.log('Modified Names\n', fullnamesPrettyPrint(modifiedNames));
 
-  console.log('Invented Names ', getInventedNames(modifiedNames));
+  const inventedNames = getInventedNames(modifiedNames);
+  console.log('Invented Names\n', fullnamesPrettyPrint(inventedNames));
 
 }
-
 
 
 startFromCommand(process.argv);
