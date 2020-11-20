@@ -6,9 +6,11 @@
   "license": "ISC",
   "main": "init.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node init.js coding-test-data.txt"
   },
   "repository": {

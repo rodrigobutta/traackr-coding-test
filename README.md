@@ -1,10 +1,13 @@
 # Traackr coding test
 
 ### Build
-Run `npm i`
+`npm i`
+
+### Execute test
+`npm run test`
 
 ### Run with test file
-Run `npm start`
+`npm start`
 
 ### Run with custom file
 `node init.js <FILE>`
