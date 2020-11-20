@@ -1,12 +1,14 @@
 const assert = require('assert');
-const {   
+const {       
     fullnamesPrettyPrint,
     getFullName,
+    isAlphabetic, 
+} = require('../src/helpers'); 
+const {       
     getInventedNames,  
     getModifiedNames, 
     getRanked, 
-    isAlphabetic, 
-} = require('../src/helpers'); 
+} = require('../src/reports'); 
 
 describe('Alphabetic', () => {
 
