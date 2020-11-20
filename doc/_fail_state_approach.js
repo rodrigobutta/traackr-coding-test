@@ -6,7 +6,7 @@ const {
   getRanked, 
   getModifiedNames, 
   getInventedNames,
-} = require('./helpers'); 
+} = require('../src/helpers'); 
 
 // Some config definitions
 const SUFFIX_SPLITTER = ' -- ';
@@ -94,10 +94,10 @@ const createReport = state => {
   console.log('Firstnames Count ', Object.keys(state.firstNames).length);
   console.log('Lastnames Count ', Object.keys(state.lastNames).length);
 
-  const lastNamesRanking = getRanked(state.lastNames, RANKING_COUNT);
+  const lastNamesRanking = getRanked(state.lastNames, 10);
   console.log('lastNames Rank ', lastNamesRanking);
 
-  const firstNamesRanking = getRanked(state.firstNames, RANKING_COUNT);
+  const firstNamesRanking = getRanked(state.firstNames, 10);
   console.log('FirstNames Rank ', firstNamesRanking);
 
   const modifiedNames = getModifiedNames(state.fullNames, 25)

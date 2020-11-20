@@ -2,6 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 const stream = require('stream');
 const {   
+  addOrIncrement,
   fullnamesPrettyPrint,
   getFullName,
   getInventedNames,  
@@ -45,26 +46,22 @@ const parseLine = line => {
   if(!isAlphabetic(line.charAt(0))) return;
   
   const fullName = line.split(SUFFIX_SPLITTER)[0];
+  
+  // Get the name parts or skip names that don't follow the structure (coding-test.txt@108)
   const nameParts = fullName.split(FULLNAME_SPLITTER);
-
-  // Skip names that don't follow the structure (coding-test.txt@108)
   if(nameParts.length !== 2 
     || !isAlphabetic(nameParts[0]) 
     || !isAlphabetic(nameParts[1]))    
     return;
-
   const lastName = nameParts[0];
   const firstName = nameParts[1];
 
+  // if we arrived here, the name is ok to be added into our collection
   fullNames.push(getFullName(firstName,lastName));
 
-  lastNames[lastName] = lastName in lastNames 
-                        ? lastNames[lastName]+1 
-                        : 0;
-
-  firstNames[firstName] = firstName in firstNames
-                        ? firstNames[firstName]+1 
-                        : 0;
+  // If firstname/lastname already exists, add 1 to its count, otherwise, add name with 0
+  lastNames[lastName] = addOrIncrement(lastNames, lastName); 
+  firstNames[firstName] = addOrIncrement(firstNames, firstName);;
   
 }
 

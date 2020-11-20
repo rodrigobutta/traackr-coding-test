@@ -44,10 +44,17 @@ const getInventedNames = (array = []) =>
         ))
     : [];
 
+// For output purposes
 const fullnamesPrettyPrint = (array = []) => 
     array.map(fn => `${fn.last}, ${fn.first}`);
 
-module.exports = {     
+
+const addOrIncrement = (names = {}, name) => name in names 
+? names[name]+1 
+: 0;
+
+module.exports = {
+    addOrIncrement,  
     fullnamesPrettyPrint,
     getFullName,    
     getModifiedNames,
