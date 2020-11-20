@@ -1,0 +1,18 @@
+{
+  "name": "traackr-coding-test",
+  "author": "Rodrigo Butta",
+  "version": "1.0.0",
+  "description": "Traackr coding test",
+  "license": "ISC",
+  "main": "init.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node init.js coding-test-data.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigobutta/traackr-coding-test.git"
+  }
+}
