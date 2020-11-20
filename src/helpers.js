@@ -1,4 +1,8 @@
-const REGEX_ONLY_ALPHABETIC = /^[a-zA-Z'`ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+$/i; //^[a-zA-Z]+$/i
+const {   
+    DEFAULT_MODIFIED_NAMES_COUNT,
+    DEFAULT_RANKING_COUNT,
+    REGEX_ONLY_ALPHABETIC,
+} = require('./config'); 
 
 const isAlphabetic = string => REGEX_ONLY_ALPHABETIC.test(string);
 
@@ -9,12 +13,12 @@ const getFullName = (firstName = '', lastName = '') => ({
 
 // Assuming a dictionary {label->value} where the item would be the key (firstname, lastname)
 // and the value is the count of ocurrencies
-const getRanked = (dict, max) => 
+const getRanked = (dict, max = DEFAULT_RANKING_COUNT) => 
     Object.entries(dict).sort((a, b) => 
         b[1]-a[1]).slice(0, max);
 
 // Take the first N names from the array where first and last are unique for that property
-const getModifiedNames = (array, max = 25) => {
+const getModifiedNames = (array, max = DEFAULT_MODIFIED_NAMES_COUNT) => {
   // I would have used a reduce here, but reduce cannot be early breaked so if I already found the N modified names that I want,
   // I'd rather stop looping a huge array 
     const acc = [];
@@ -29,7 +33,7 @@ const getModifiedNames = (array, max = 25) => {
 }
 
 // Because I know there wont be firstNames and lastNames dups, I can offset 1 key of first or last and it will do the job
-const getInventedNames = ( array = [] ) => 
+const getInventedNames = (array = []) => 
     array.length >= 2
     ? array.map((item, index) => 
         getFullName(
@@ -40,7 +44,7 @@ const getInventedNames = ( array = [] ) =>
         ))
     : [];
 
-const fullnamesPrettyPrint = ( array = [] ) => 
+const fullnamesPrettyPrint = (array = []) => 
     array.map(fn => `${fn.last}, ${fn.first}`);
 
 module.exports = {     

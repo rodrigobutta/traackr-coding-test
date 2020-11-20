@@ -6,7 +6,7 @@ const {
     getModifiedNames, 
     getRanked, 
     isAlphabetic, 
-} = require('../helpers'); 
+} = require('../src/helpers'); 
 
 describe('Alphabetic', () => {
 

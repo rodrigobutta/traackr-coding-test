@@ -12,6 +12,5 @@
 ### Run with custom file
 `node init.js <FILE>`
 
-### Just in case
-*Run with and memory override
+### Run with memory override
 `node --max-old-space-size=8192 init.js <FILE>`

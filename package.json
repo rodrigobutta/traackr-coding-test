@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "description": "Traackr coding test",
   "license": "ISC",
-  "main": "init.js",
+  "main": "src/init.js",
   "dependencies": {},
   "devDependencies": {
     "mocha": "^8.2.1"
   },
   "scripts": {
     "test": "mocha",
-    "start": "node init.js coding-test-data.txt"
+    "start": "node src/init.js data/coding-test-data.txt"
   },
   "repository": {
     "type": "git",

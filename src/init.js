@@ -10,10 +10,10 @@ const {
   isAlphabetic, 
 } = require('./helpers'); 
 
-// Some config definitions
-const SUFFIX_SPLITTER = ' -- ';
-const FULLNAME_SPLITTER = ', ';
-const RANKING_COUNT = 10;
+const {   
+  SUFFIX_SPLITTER,
+  FULLNAME_SPLITTER,
+} = require('./config'); 
 
 // state
 const fullNames = []; // Array of objects {first: '', last: ''}
@@ -73,10 +73,10 @@ const createReport = () => {
   console.log('Firstnames Count:', Object.keys(firstNames).length);
   console.log('Lastnames Count:', Object.keys(lastNames).length);
 
-  const lastNamesRanking = getRanked(lastNames, RANKING_COUNT);
+  const lastNamesRanking = getRanked(lastNames, 10);
   console.log('lastNames Rank\n', lastNamesRanking);
 
-  const firstNamesRanking = getRanked(firstNames, RANKING_COUNT);
+  const firstNamesRanking = getRanked(firstNames, 10);
   console.log('FirstNames Rank\n', firstNamesRanking);
 
   const modifiedNames = getModifiedNames(fullNames, 25)
